@@ -12,7 +12,7 @@ Teste do envio de exercicio - Satisfação do Cliente
     Dado que acesso o site iterasys
     Quando clico no botao Acessar
     Quando preencho o campo identificação do usuario        teste@bol.com.br
-    E preencho o campo senha                                Sabbat@18*68
+    E preencho o campo senha                                Squad@2026
     E clico no botao Acessar
     Entao sou direcionado para a pagina principal
     Quando clico no botao Pagina inicial
