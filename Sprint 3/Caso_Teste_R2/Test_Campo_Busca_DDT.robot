@@ -12,7 +12,7 @@ ${timeout}    10000ms
 TC001    Test    
 TC002    QA
 TC003    Pyth
-TC004    ${EMPTY}
+TC004    ${EMPTY}        #Vazio
 TC005    2024
 
 *** Keywords ***
