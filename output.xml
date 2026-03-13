@@ -1,222 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2026-03-07T10:36:25.948433" rpa="false" schemaversion="5">
-<suite id="s1" name="Carrinho Mostra Produto Correto" source="c:\Squad 145\Sprint 4\Carrinho_Mostra_Produto_Correto.robot">
-<test id="s1-t1" name="Carrinho mostra produto correto - Calsa Jeans" line="11">
-<kw name="Dado que acesso o site demowebshop">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:26.591178" level="INFO">Opening browser 'Chrome' to base url 'https://demowebshop.tricentis.com/'.</msg>
-<arg>url=${url}</arg>
-<arg>browser=${browser}</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-03-07T10:36:26.590356" elapsed="3.947111"/>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2026-03-12T10:33:54.847783" rpa="false" schemaversion="5">
+<suite id="s1" name="Bookstore Testes" source="c:\Squad 145\Sprint 5\__test__\api\bookstore_testes.robot">
+<test id="s1-t1" name="Generate Token" line="12">
+<kw name="Create Token" owner="Authorized">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-12T10:33:55.695219" level="INFO">${body} = {'userName': 'pauloqa2337', 'password': 'Test@1234'}</msg>
+<var>${body}</var>
+<arg>userName=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-12T10:33:55.694427" elapsed="0.005695"/>
 </kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-03-07T10:36:30.538216" elapsed="2.286182"/>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-12T10:34:00.142032" level="INFO">POST Request : url=https://demoqa.com/Account/v1/GenerateToken 
+ path_url=/Account/v1/GenerateToken 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Content-Type': 'application/json'} 
+ body=b'{"userName": "pauloqa2337", "password": "Test@1234"}' 
+ </msg>
+<msg time="2026-03-12T10:34:00.142620" level="INFO">POST Response : url=https://demoqa.com/Account/v1/GenerateToken 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Thu, 12 Mar 2026 13:34:05 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '85', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"55-uDqoBYBzbvMfwcbBiE9kdrLOtHY"'} 
+ body={"token":null,"expires":null,"status":"Failed","result":"User authorization failed."} 
+ </msg>
+<msg time="2026-03-12T10:34:00.142892" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/GenerateToken</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-12T10:33:55.700664" elapsed="4.442330"/>
 </kw>
-<kw name="Set Browser Implicit Wait" owner="SeleniumLibrary">
-<arg>5000ms</arg>
-<doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2026-03-07T10:36:32.824865" elapsed="0.023527"/>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-12T10:34:00.144030" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-12T10:34:00.143269" elapsed="0.000936"/>
 </kw>
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=img[alt="Tricentis Demo Web Shop"]</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-07T10:36:32.849036" elapsed="0.127140"/>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-12T10:34:00.144962" level="INFO">${response_body} = {'token': None, 'expires': None, 'status': 'Failed', 'result': 'User authorization failed.'}</msg>
+<var>${response_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-12T10:34:00.144386" elapsed="0.000705"/>
 </kw>
-<status status="PASS" start="2026-03-07T10:36:26.588802" elapsed="6.387888"/>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response_body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-12T10:34:00.145279" elapsed="0.000478"/>
 </kw>
-<kw name="Entao sou direcionado para a pagina principal">
-<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:33.056804" level="INFO">Element 'css=img[alt="Tricentis Demo Web Shop"]' attribute 'alt' contains value 'Tricentis Demo Web Shop'.</msg>
-<arg>css=img[alt="Tricentis Demo Web Shop"]</arg>
-<arg>alt</arg>
-<arg>Tricentis Demo Web Shop</arg>
-<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
-<status status="PASS" start="2026-03-07T10:36:32.991189" elapsed="0.066056"/>
+<kw name="Dictionary Should Contain Item" owner="Collections">
+<msg time="2026-03-12T10:34:00.146736" level="FAIL">Value of dictionary key 'status' does not match: Failed != Success</msg>
+<arg>${response_body}</arg>
+<arg>status</arg>
+<arg>Success</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="FAIL" start="2026-03-12T10:34:00.146126" elapsed="0.003178">Value of dictionary key 'status' does not match: Failed != Success</status>
 </kw>
-<status status="PASS" start="2026-03-07T10:36:32.990528" elapsed="0.067021"/>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${response_body}[token]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2026-03-12T10:34:00.149814" elapsed="0.000224"/>
 </kw>
-<kw name="Quando clico no item Apparel &amp; Shoes">
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:33.067903" level="INFO">Clicking element 'css=a[href="/apparel-shoes"]'.</msg>
-<arg>css=a[href="/apparel-shoes"]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:33.059626" elapsed="1.089324"/>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${response_body}[expires]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2026-03-12T10:34:00.150384" elapsed="0.000208"/>
 </kw>
-<status status="PASS" start="2026-03-07T10:36:33.058908" elapsed="1.090508"/>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${Token}</var>
+<arg>${response_body}[token]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-12T10:34:00.150933" elapsed="0.000208"/>
 </kw>
-<kw name="Entao sou direcionado para a pagina de produtos">
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:34.154020" level="INFO">Verifying element 'css=h1' contains exact text 'Apparel &amp; Shoes'.</msg>
-<arg>css=h1</arg>
-<arg>Apparel &amp; Shoes</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:34.153559" elapsed="0.088488"/>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${Token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-03-12T10:34:00.151487" elapsed="0.000180"/>
 </kw>
-<status status="PASS" start="2026-03-07T10:36:34.152966" elapsed="0.089442"/>
+<status status="FAIL" start="2026-03-12T10:33:55.693296" elapsed="4.458696">Value of dictionary key 'status' does not match: Failed != Success</status>
 </kw>
-<kw name="Quando clico no produto">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=img[alt="${Produto}"]</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-07T10:36:34.251506" elapsed="0.054460"/>
-</kw>
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:34.306663" level="INFO">Clicking element 'css=img[alt="Picture of Blue Jeans"]'.</msg>
-<arg>css=img[alt="${Produto}"]</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:34.306262" elapsed="3.318088"/>
-</kw>
-<arg>Picture of Blue Jeans</arg>
-<arg>1,00</arg>
-<status status="PASS" start="2026-03-07T10:36:34.250643" elapsed="3.374248"/>
-</kw>
-<kw name="Então sou direcionado para a pagina do produto">
-<kw name="Element Attribute Value Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:37.672583" level="INFO">Element 'id=main-product-img-36' attribute 'alt' contains value 'Picture of Blue Jeans'.</msg>
-<arg>id=main-product-img-36</arg>
-<arg>alt</arg>
-<arg>Picture of Blue Jeans</arg>
-<doc>Verifies element identified by ``locator`` contains expected attribute value.</doc>
-<status status="PASS" start="2026-03-07T10:36:37.628413" elapsed="0.044828"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:37.674662" level="INFO">Verifying element 'css=span[itemprop="price"]' contains exact text '1.00'.</msg>
-<arg>css=span[itemprop="price"]</arg>
-<arg>1.00</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:37.673746" elapsed="0.056638"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:37.626088" elapsed="0.104573"/>
-</kw>
-<kw name="Quando clico em adicionar no carrinho">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:37.733140" level="INFO">Clicking button 'id=add-to-cart-button-36'.</msg>
-<arg>id=add-to-cart-button-36</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:37.732450" elapsed="0.203480"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:37.731607" elapsed="0.204642"/>
-</kw>
-<kw name="Entao visualizo o numero de itens no carrinho">
-<kw name="Set Test Variable" owner="BuiltIn">
-<msg time="2026-03-07T10:36:37.941387" level="INFO">${Cart_items} = 1</msg>
-<arg>${Cart_items}</arg>
-<arg>${Items}</arg>
-<doc>Makes a variable available everywhere within the scope of the current test.</doc>
-<status status="PASS" start="2026-03-07T10:36:37.939833" elapsed="0.002096"/>
-</kw>
-<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css=span.cart-qty</arg>
-<arg>${Cart_items}</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2026-03-07T10:36:37.942368" elapsed="0.534149"/>
-</kw>
-<arg>1</arg>
-<status status="PASS" start="2026-03-07T10:36:37.939134" elapsed="0.538154"/>
-</kw>
-<kw name="Quando clico no icone do carrinho">
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:38.488013" level="INFO">Clicking element 'css=span.cart-label'.</msg>
-<arg>css=span.cart-label</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:38.487365" elapsed="0.822365"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:38.486215" elapsed="0.824856"/>
-</kw>
-<kw name="Entao sou direcionado para a pagina do carrinho">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=h1</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.324066" elapsed="0.019412"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:39.346769" level="INFO">Verifying element 'css=h1' contains exact text 'Shopping cart'.</msg>
-<arg>css=h1</arg>
-<arg>Shopping cart</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.345747" elapsed="0.043916"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:39.319973" elapsed="0.069913"/>
-</kw>
-<kw name="E confirmo se a descrição do produto no carrinho esta correta">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=a.product-name</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.390959" elapsed="0.026827"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:39.418740" level="INFO">Verifying element 'css=a.product-name' contains exact text 'Blue Jeans'.</msg>
-<arg>css=a.product-name</arg>
-<arg>Blue Jeans</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.418237" elapsed="0.039124"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:39.457875" level="INFO">Verifying element 'css=span.product-unit-price' contains exact text '1.00'.</msg>
-<arg>css=span.product-unit-price</arg>
-<arg>1.00</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.457619" elapsed="0.028881"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:39.390388" elapsed="0.096484"/>
-</kw>
-<kw name="Quando clico Remover Item">
-<kw name="Click Element" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:39.490089" level="INFO">Clicking element 'name=removefromcart'.</msg>
-<arg>name=removefromcart</arg>
-<doc>Click the element identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.489216" elapsed="0.249247"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:39.488140" elapsed="0.250571"/>
-</kw>
-<kw name="E clico em Atualizar Carrinho de Compras">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:39.740149" level="INFO">Clicking button 'name=updatecart'.</msg>
-<arg>name=updatecart</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-03-07T10:36:39.739775" elapsed="0.800367"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:39.739203" elapsed="0.801278"/>
-</kw>
-<kw name="Entao sou direcionado para a pagina Carrinho de Compras">
-<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
-<arg>css=h1</arg>
-<arg>${timeout}</arg>
-<doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-03-07T10:36:40.542499" elapsed="0.030949"/>
-</kw>
-<kw name="Element Text Should Be" owner="SeleniumLibrary">
-<msg time="2026-03-07T10:36:40.574205" level="INFO">Verifying element 'css=h1' contains exact text 'Shopping cart'.</msg>
-<arg>css=h1</arg>
-<arg>Shopping cart</arg>
-<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
-<status status="PASS" start="2026-03-07T10:36:40.573771" elapsed="0.019693"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:40.541113" elapsed="0.053103"/>
-</kw>
-<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
-<doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-03-07T10:36:40.600593" elapsed="2.376040"/>
-</kw>
-<status status="PASS" start="2026-03-07T10:36:26.575071" elapsed="16.403752"/>
+<status status="FAIL" start="2026-03-12T10:33:55.692068" elapsed="4.461285">Value of dictionary key 'status' does not match: Failed != Success</status>
 </test>
-<status status="PASS" start="2026-03-07T10:36:25.962468" elapsed="17.020336"/>
+<status status="FAIL" start="2026-03-12T10:33:54.854433" elapsed="5.308303"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Carrinho Mostra Produto Correto" id="s1" pass="1" fail="0" skip="0">Carrinho Mostra Produto Correto</stat>
+<stat name="Bookstore Testes" id="s1" pass="0" fail="1" skip="0">Bookstore Testes</stat>
 </suite>
 </statistics>
 <errors>

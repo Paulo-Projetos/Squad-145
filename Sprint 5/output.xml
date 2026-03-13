@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2026-03-13T10:17:24.390327" rpa="false" schemaversion="5">
+<suite id="s1" name="Bookstore Testes" source="C:\Squad 145\Sprint 5\__test__\api\bookstore_testes.robot">
+<test id="s1-t1" name="Create User" line="9">
+<kw name="Create User" owner="Users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:25.123949" level="INFO">${body} = {'userName': 'pauloqa2391', 'password': 'Test@1234'}</msg>
+<var>${body}</var>
+<arg>userName=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:25.123303" elapsed="0.000706"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:29.579311" level="INFO">POST Request : url=https://demoqa.com/Account/v1/User 
+ path_url=/Account/v1/User 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Content-Type': 'application/json'} 
+ body=b'{"userName": "pauloqa2391", "password": "Test@1234"}' 
+ </msg>
+<msg time="2026-03-13T10:17:29.579434" level="INFO">POST Response : url=https://demoqa.com/Account/v1/User 
+ status=201, reason=Created 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '85', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"55-TR+65oRDXs4Kfk5N7DTFr81RPtg"'} 
+ body={"userID":"970cfdcb-7745-45fe-b9ae-38126573a39e","username":"pauloqa2391","books":[]} 
+ </msg>
+<msg time="2026-03-13T10:17:29.579555" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/User</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-13T10:17:25.124215" elapsed="4.455366"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.579721" elapsed="0.000593"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.580444" elapsed="0.000560"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.581522" level="INFO">${response_body} = {'userID': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'username': 'pauloqa2391', 'books': []}</msg>
+<var>${response_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.581125" elapsed="0.000423"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.581963" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.581639" elapsed="0.000373"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.582191" level="INFO">Length is 36.</msg>
+<arg>${response_body}[userID]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.582092" elapsed="0.000135"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response_body}[username]</arg>
+<arg>${username}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.582306" elapsed="0.000141"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.582626" level="INFO">Length is 0.</msg>
+<arg>${response_body}[books]</arg>
+<arg>0</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.582527" elapsed="0.000135"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.582854" level="INFO">${userId} = 970cfdcb-7745-45fe-b9ae-38126573a39e</msg>
+<var>${userId}</var>
+<arg>${response_body}[userID]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.582746" elapsed="0.000127"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.583099" level="INFO">${userId} = 970cfdcb-7745-45fe-b9ae-38126573a39e</msg>
+<arg>${userId}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.582957" elapsed="0.000174"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:25.121596" elapsed="4.461606"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:25.120877" elapsed="4.462534"/>
+</test>
+<test id="s1-t2" name="Generate Token" line="12">
+<kw name="Create Token" owner="Authorized">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:29.585181" level="INFO">${body} = {'userName': 'pauloqa2391', 'password': 'Test@1234'}</msg>
+<var>${body}</var>
+<arg>userName=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.584961" elapsed="0.000246"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:34.112459" level="INFO">POST Request : url=https://demoqa.com/Account/v1/GenerateToken 
+ path_url=/Account/v1/GenerateToken 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Content-Type': 'application/json'} 
+ body=b'{"userName": "pauloqa2391", "password": "Test@1234"}' 
+ </msg>
+<msg time="2026-03-13T10:17:34.112546" level="INFO">POST Response : url=https://demoqa.com/Account/v1/GenerateToken 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:40 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '278', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"116-QToF8GnqOPX4Y4aMsumBP1bSyUM"'} 
+ body={"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938","expires":"2026-03-20T13:17:40.061Z","status":"Success","result":"User authorized successfully."} 
+ </msg>
+<msg time="2026-03-13T10:17:34.112662" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/GenerateToken</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-13T10:17:29.585296" elapsed="4.527394"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.113321" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.112833" elapsed="0.000555"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.114106" level="INFO">${response_body} = {'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'expires': '2026-...</msg>
+<var>${response_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.113512" elapsed="0.000660"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response_body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.114310" elapsed="0.000307"/>
+</kw>
+<kw name="Dictionary Should Contain Item" owner="Collections">
+<arg>${response_body}</arg>
+<arg>status</arg>
+<arg>Success</arg>
+<doc>An item of ``key`` / ``value`` must be found in a ``dictionary``.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.114965" elapsed="0.000243"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.115473" level="INFO">Length is 169.</msg>
+<arg>${response_body}[token]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.115332" elapsed="0.000189"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.115836" level="INFO">Length is 24.</msg>
+<arg>${response_body}[expires]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.115657" elapsed="0.000227"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response_body}[status]</arg>
+<arg>Success</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.115992" elapsed="0.000205"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${response_body}[result]</arg>
+<arg>User authorized</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.116333" elapsed="0.000174"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.116884" level="INFO">${Token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938</msg>
+<var>${Token}</var>
+<arg>${response_body}[token]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.116641" elapsed="0.000279"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.117244" level="INFO">${Token} = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938</msg>
+<arg>${Token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.117050" elapsed="0.000266"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:29.584409" elapsed="4.532960"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:29.584000" elapsed="4.533608"/>
+</test>
+<test id="s1-t3" name="Authorize User" line="15">
+<kw name="Authorized User" owner="Authorized">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:34.119683" level="INFO">${body} = {'userName': 'pauloqa2391', 'password': 'Test@1234'}</msg>
+<var>${body}</var>
+<arg>userName=${username}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.119296" elapsed="0.000450"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:38.164718" level="INFO">POST Request : url=https://demoqa.com/Account/v1/Authorized 
+ path_url=/Account/v1/Authorized 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '52', 'Content-Type': 'application/json'} 
+ body=b'{"userName": "pauloqa2391", "password": "Test@1234"}' 
+ </msg>
+<msg time="2026-03-13T10:17:38.164853" level="INFO">POST Response : url=https://demoqa.com/Account/v1/Authorized 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:44 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '4', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"4-X/5TO4MPCKAyY0ipFgr6/IraRNs"'} 
+ body=true 
+ </msg>
+<msg time="2026-03-13T10:17:38.164985" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/Authorized</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-13T10:17:34.119902" elapsed="4.045125"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:38.165724" level="INFO">${response_body} = True</msg>
+<var>${response_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:38.165209" elapsed="0.000539"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response_body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:38.166018" elapsed="0.000792"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2026-03-13T10:17:38.167361" elapsed="0.000304"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response_body}</arg>
+<arg>${{bool(True)}}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:38.168117" elapsed="0.000952"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:34.118904" elapsed="4.050330"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:34.118287" elapsed="4.051294"/>
+</test>
+<test id="s1-t4" name="List Books" line="18">
+<kw name="Get Books" owner="books">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:41.911958" level="INFO">GET Request : url=https://demoqa.com/BookStore/v1/Books 
+ path_url=/BookStore/v1/Books 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:17:41.912154" level="INFO">GET Response : url=https://demoqa.com/BookStore/v1/Books 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:48 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '4514', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"11a2-8zfX++QwcgaCjSU6F8JP9fUd1tY"'} 
+ body={"books":[{"isbn":"9781449325862","title":"Git Pocket Guide","subTitle":"A Working Introduction","author":"Richard E. Silverman","publish_date":"2020-06-04T08:48:39.000Z","publisher":"O'Reilly Media","pages":234,"description":"This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp","website":"http://chimera.labs.oreilly.com/books/1230000000561/index.html"},{"isbn":"9781449331818","title":"Learning JavaScript Design Patterns","subTitle":"A JavaScript and jQuery Developer's Guide","author":"Addy Osmani","publish_date":"2020-06-04T09:11:40.000Z","publisher":"O'Reilly Media","pages":254,"description":"With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-da","website":"http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/"},{"isbn":"9781449337711","title":"Designing Evolvable Web APIs with ASP.NET","subTitle":"Harnessing the Power of the Web","author":"Glenn Block et al.","publish_date":"2020-06-04T09:12:43.000Z","publisher":"O'Reilly Media","pages":238,"description":"Design and build Web APIs for a broad range of clients—including browsers and mobile devices—that can adapt to change over time. This practical, hands-on guide takes you through the theory and tools you need to build evolvable HTTP services with Microsoft","website":"http://chimera.labs.oreilly.com/books/1234000001708/index.html"},{"isbn":"9781449365035","title":"Speaking JavaScript","subTitle":"An In-Depth Guide for Programmers","author":"Axel Rauschmayer","publish_date":"2014-02-01T00:00:00.000Z","publisher":"O'Reilly Media","pages":460,"description":"Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o","website":"http://speakingjs.com/"},{"isbn":"9781491904244","title":"You Don't Know JS","subTitle":"ES6 &amp; Beyond","author":"Kyle Simpson","publish_date":"2015-12-27T00:00:00.000Z","publisher":"O'Reilly Media","pages":278,"description":"No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. As part of the \\\"You Don’t Know JS\\\" series, this compact guide focuses on new features available in ECMAScript 6 (ES6), the latest version of the st","website":"https://github.com/getify/You-Dont-Know-JS/tree/master/es6%20&amp;%20beyond"},{"isbn":"9781491950296","title":"Programming JavaScript Applications","subTitle":"Robust Web Architecture with Node, HTML5, and Modern JS Libraries","author":"Eric Elliott","publish_date":"2014-07-01T00:00:00.000Z","publisher":"O'Reilly Media","pages":254,"description":"Take advantage of JavaScript's power to build robust web-scale or enterprise applications that are easy to extend and maintain. By applying the design patterns outlined in this practical book, experienced JavaScript developers will learn how to write flex","website":"http://chimera.labs.oreilly.com/books/1234000000262/index.html"},{"isbn":"9781593275846","title":"Eloquent JavaScript, Second Edition","subTitle":"A Modern Introduction to Programming","author":"Marijn Haverbeke","publish_date":"2014-12-14T00:00:00.000Z","publisher":"No Starch Press","pages":472,"description":"JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale ","website":"http://eloquentjavascript.net/"},{"isbn":"9781593277574","title":"Understanding ECMAScript 6","subTitle":"The Definitive Guide for JavaScript Developers","author":"Nicholas C. Zakas","publish_date":"2016-09-03T00:00:00.000Z","publisher":"No Starch Press","pages":352,"description":"ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that E","website":"https://leanpub.com/understandinges6/read"}]} 
+ </msg>
+<msg time="2026-03-13T10:17:41.912912" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/BookStore/v1/Books</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-03-13T10:17:38.171126" elapsed="3.741858"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.914405" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.913452" elapsed="0.001087"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.914924" elapsed="0.000983"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.916196" elapsed="0.005372"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.922830" level="INFO">RESPONSE BODY: {'books': [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard E. Silverman', 'publish_date': '2020-06-04T08:48:39.000Z', 'publisher': "O'Reilly Media", 'pages': 234, 'description': 'This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp', 'website': 'http://chimera.labs.oreilly.com/books/1230000000561/index.html'}, {'isbn': '9781449331818', 'title': 'Learning JavaScript Design Patterns', 'subTitle': "A JavaScript and jQuery Developer's Guide", 'author': 'Addy Osmani', 'publish_date': '2020-06-04T09:11:40.000Z', 'publisher': "O'Reilly Media", 'pages': 254, 'description': "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-da", 'website': 'http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/'}, {'isbn': '9781449337711', 'title': 'Designing Evolvable Web APIs with ASP.NET', 'subTitle': 'Harnessing the Power of the Web', 'author': 'Glenn Block et al.', 'publish_date': '2020-06-04T09:12:43.000Z', 'publisher': "O'Reilly Media", 'pages': 238, 'description': 'Design and build Web APIs for a broad range of clients—including browsers and mobile devices—that can adapt to change over time. This practical, hands-on guide takes you through the theory and tools you need to build evolvable HTTP services with Microsoft', 'website': 'http://chimera.labs.oreilly.com/books/1234000001708/index.html'}, {'isbn': '9781449365035', 'title': 'Speaking JavaScript', 'subTitle': 'An In-Depth Guide for Programmers', 'author': 'Axel Rauschmayer', 'publish_date': '2014-02-01T00:00:00.000Z', 'publisher': "O'Reilly Media", 'pages': 460, 'description': 'Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o', 'website': 'http://speakingjs.com/'}, {'isbn': '9781491904244', 'title': "You Don't Know JS", 'subTitle': 'ES6 &amp; Beyond', 'author': 'Kyle Simpson', 'publish_date': '2015-12-27T00:00:00.000Z', 'publisher': "O'Reilly Media", 'pages': 278, 'description': 'No matter how much experience you have with JavaScript, odds are you don’t fully understand the language. As part of the \\"You Don’t Know JS\\" series, this compact guide focuses on new features available in ECMAScript 6 (ES6), the latest version of the st', 'website': 'https://github.com/getify/You-Dont-Know-JS/tree/master/es6%20&amp;%20beyond'}, {'isbn': '9781491950296', 'title': 'Programming JavaScript Applications', 'subTitle': 'Robust Web Architecture with Node, HTML5, and Modern JS Libraries', 'author': 'Eric Elliott', 'publish_date': '2014-07-01T00:00:00.000Z', 'publisher': "O'Reilly Media", 'pages': 254, 'description': "Take advantage of JavaScript's power to build robust web-scale or enterprise applications that are easy to extend and maintain. By applying the design patterns outlined in this practical book, experienced JavaScript developers will learn how to write flex", 'website': 'http://chimera.labs.oreilly.com/books/1234000000262/index.html'}, {'isbn': '9781593275846', 'title': 'Eloquent JavaScript, Second Edition', 'subTitle': 'A Modern Introduction to Programming', 'author': 'Marijn Haverbeke', 'publish_date': '2014-12-14T00:00:00.000Z', 'publisher': 'No Starch Press', 'pages': 472, 'description': 'JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale ', 'website': 'http://eloquentjavascript.net/'}, {'isbn': '9781593277574', 'title': 'Understanding ECMAScript 6', 'subTitle': 'The Definitive Guide for JavaScript Developers', 'author': 'Nicholas C. Zakas', 'publish_date': '2016-09-03T00:00:00.000Z', 'publisher': 'No Starch Press', 'pages': 352, 'description': 'ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that E', 'website': 'https://leanpub.com/understandinges6/read'}]}</msg>
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.921821" elapsed="0.001126"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.924337" level="INFO">${body} = {'books': [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard E. Silverman', 'publish_date': '2020-06-04T08:48:39.000Z', 'publisher': "O'Re...</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.923153" elapsed="0.001262"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.925544" level="INFO">${books} = [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard E. Silverman', 'publish_date': '2020-06-04T08:48:39.000Z', 'publisher': "O'Reilly Media...</msg>
+<var>${books}</var>
+<arg>${body["books"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.924625" elapsed="0.000985"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.926338" level="INFO">${books_count} = 8</msg>
+<var>${books_count}</var>
+<arg>len($books)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.925865" elapsed="0.000535"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($books, list)</arg>
+<arg>books deve ser uma lista</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.926607" elapsed="0.000508"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${books_count} &gt; 0</arg>
+<arg>a lista de livros não deve estar vazia</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.927472" elapsed="0.000656"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.929270" level="INFO">Length is 13.</msg>
+<arg>${books[0]["isbn"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.928390" elapsed="0.000989"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.930518" level="INFO">Length is 16.</msg>
+<arg>${books[0]["title"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.929707" elapsed="0.000909"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.931371" level="INFO">Length is 22.</msg>
+<arg>${books[0]["subTitle"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.930826" elapsed="0.000599"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.931910" level="INFO">Length is 20.</msg>
+<arg>${books[0]["author"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.931542" elapsed="0.000405"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.932339" level="INFO">Length is 24.</msg>
+<arg>${books[0]["publish_date"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.932033" elapsed="0.000341"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.932764" level="INFO">Length is 14.</msg>
+<arg>${books[0]["publisher"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.932456" elapsed="0.000344"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${books[0]["pages"]} &gt;= 0</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.932893" elapsed="0.002394"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.936895" level="INFO">Length is 255.</msg>
+<arg>${books[0]["description"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.935587" elapsed="0.001496"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.938003" level="INFO">Length is 62.</msg>
+<arg>${books[0]["website"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.937333" elapsed="0.000786"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.939210" level="INFO">${isbn} = 9781449325862</msg>
+<var>${isbn}</var>
+<arg>${books[0]["isbn"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.938355" elapsed="0.000892"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.939812" level="INFO">${isbn} = 9781449325862</msg>
+<arg>${isbn}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.939562" elapsed="0.000390"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:38.170789" elapsed="3.769370"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:38.170220" elapsed="3.770718"/>
+</test>
+<test id="s1-t5" name="Add Book To User" line="21">
+<kw name="Add Book" owner="books">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.944177" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'C...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.943385" elapsed="0.000891"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.945053" level="INFO">${isbn_obj} = {'isbn': '9781449325862'}</msg>
+<var>${isbn_obj}</var>
+<arg>isbn=${isbn}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.944616" elapsed="0.000491"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.945962" level="INFO">${list} = [{'isbn': '9781449325862'}]</msg>
+<var>${list}</var>
+<arg>${isbn_obj}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.945337" elapsed="0.000681"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:41.947384" level="INFO">${body} = {'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'collectionOfIsbns': [{'isbn': '9781449325862'}]}</msg>
+<var>${body}</var>
+<arg>userId=${userId}</arg>
+<arg>collectionOfIsbns=${list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.946618" elapsed="0.000844"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:45.917423" level="INFO">POST Request : url=https://demoqa.com/BookStore/v1/Books 
+ path_url=/BookStore/v1/Books 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'Content-Type': 'application/json', 'Content-Length': '100'} 
+ body=b'{"userId": "970cfdcb-7745-45fe-b9ae-38126573a39e", "collectionOfIsbns": [{"isbn": "9781449325862"}]}' 
+ </msg>
+<msg time="2026-03-13T10:17:45.917561" level="INFO">POST Response : url=https://demoqa.com/BookStore/v1/Books 
+ status=201, reason=Created 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:52 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '36', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"24-2U7DK3nFgERO/LjA8mW3SiqYyFc"'} 
+ body={"books":[{"isbn":"9781449325862"}]} 
+ </msg>
+<msg time="2026-03-13T10:17:45.917746" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/BookStore/v1/Books</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2026-03-13T10:17:41.947697" elapsed="3.970108"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.918732" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.918062" elapsed="0.000741"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.918944" elapsed="0.000649"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.919737" elapsed="0.000650"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.920963" level="INFO">RESPONSE BODY: {'books': [{'isbn': '9781449325862'}]}</msg>
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.920541" elapsed="0.000466"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.921466" level="INFO">${resp_body} = {'books': [{'isbn': '9781449325862'}]}</msg>
+<var>${resp_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.921102" elapsed="0.000385"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.921900" level="INFO">${books} = [{'isbn': '9781449325862'}]</msg>
+<var>${books}</var>
+<arg>${resp_body["books"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.921565" elapsed="0.000470"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($books, list)</arg>
+<arg>books deve ser uma lista</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.922136" elapsed="0.000183"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>len($books) &gt; 0</arg>
+<arg>books não deve estar vazio</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.922399" elapsed="0.000163"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.922982" level="INFO">Length is 13.</msg>
+<arg>${books[0]["isbn"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.922644" elapsed="0.000375"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${books[0]["isbn"]}</arg>
+<arg>${isbn}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.923099" elapsed="0.000647"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:41.942755" elapsed="3.981196"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:41.941919" elapsed="3.982358"/>
+</test>
+<test id="s1-t6" name="Get User Info After Add" line="24">
+<kw name="Get User With Book" owner="Users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:45.934475" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'}</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.927406" elapsed="0.007150"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:49.744583" level="INFO">GET Request : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ path_url=/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:17:49.744745" level="INFO">GET Response : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:17:56 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '634', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"27a-OQ3EeSsnP8I3HIH/s+Unm9DvadU"'} 
+ body={"userId":"970cfdcb-7745-45fe-b9ae-38126573a39e","username":"pauloqa2391","books":[{"isbn":"9781449325862","title":"Git Pocket Guide","subTitle":"A Working Introduction","author":"Richard E. Silverman","publish_date":"2020-06-04T08:48:39.000Z","publisher":"O'Reilly Media","pages":234,"description":"This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp","website":"http://chimera.labs.oreilly.com/books/1230000000561/index.html"}]} 
+ </msg>
+<msg time="2026-03-13T10:17:49.745378" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/User/${userId}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-03-13T10:17:45.934786" elapsed="3.810664"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.746636" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.745721" elapsed="0.001034"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.746979" elapsed="0.001487"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.748875" elapsed="0.002131"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.752352" level="INFO">RESPONSE BODY: {'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'username': 'pauloqa2391', 'books': [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard E. Silverman', 'publish_date': '2020-06-04T08:48:39.000Z', 'publisher': "O'Reilly Media", 'pages': 234, 'description': 'This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp', 'website': 'http://chimera.labs.oreilly.com/books/1230000000561/index.html'}]}</msg>
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.751438" elapsed="0.001072"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.754134" level="INFO">${body} = {'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'username': 'pauloqa2391', 'books': [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard ...</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.752717" elapsed="0.001491"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.755241" level="INFO">${books} = [{'isbn': '9781449325862', 'title': 'Git Pocket Guide', 'subTitle': 'A Working Introduction', 'author': 'Richard E. Silverman', 'publish_date': '2020-06-04T08:48:39.000Z', 'publisher': "O'Reilly Media...</msg>
+<var>${books}</var>
+<arg>${body["books"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.754461" elapsed="0.000828"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.755841" level="INFO">${books_count} = 1</msg>
+<var>${books_count}</var>
+<arg>len($books)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.755477" elapsed="0.000404"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body["userId"]}</arg>
+<arg>${userId}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.756022" elapsed="0.000536"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.757083" level="INFO">Length is 11.</msg>
+<arg>${body["username"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.756680" elapsed="0.000451"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($books, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.757234" elapsed="0.000177"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${books_count} &gt; 0</arg>
+<arg>usuário deve possuir ao menos um livro</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.757494" elapsed="0.000165"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.758186" level="INFO">Length is 13.</msg>
+<arg>${books[0]["isbn"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.757830" elapsed="0.000391"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.758632" level="INFO">Length is 16.</msg>
+<arg>${books[0]["title"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.758301" elapsed="0.000365"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.759140" level="INFO">Length is 20.</msg>
+<arg>${books[0]["author"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.758738" elapsed="0.000436"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${books[0]["isbn"]}</arg>
+<arg>${isbn}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.759255" elapsed="0.000351"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:45.926561" elapsed="3.833098"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:45.925193" elapsed="3.834695"/>
+</test>
+<test id="s1-t7" name="Delete Book" line="27">
+<kw name="Delete Book" owner="books">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.761896" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'C...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.761520" elapsed="0.000432"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:49.762454" level="INFO">${body} = {'isbn': '9781449325862', 'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e'}</msg>
+<var>${body}</var>
+<arg>isbn=${isbn}</arg>
+<arg>userId=${userId}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.762141" elapsed="0.000360"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:53.833540" level="INFO">DELETE Request : url=https://demoqa.com/BookStore/v1/Book 
+ path_url=/BookStore/v1/Book 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'Content-Type': 'application/json', 'Content-Length': '75'} 
+ body=b'{"isbn": "9781449325862", "userId": "970cfdcb-7745-45fe-b9ae-38126573a39e"}' 
+ </msg>
+<msg time="2026-03-13T10:17:53.833741" level="INFO">DELETE Response : url=https://demoqa.com/BookStore/v1/Book 
+ status=204, reason=No Content 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:18:00 GMT', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"76-0LSStRtXXtt+pZMLV41Cei65dIg"'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:17:53.834022" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/BookStore/v1/Book</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${body}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2026-03-13T10:17:49.762657" elapsed="4.071428"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:53.835249" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>204</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.834419" elapsed="0.000952"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.835591" elapsed="0.000915"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.836731" elapsed="0.000703"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:17:53.838368" level="INFO">RESPONSE TEXT: </msg>
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.837666" elapsed="0.000782"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:49.761054" elapsed="4.077487"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:49.760468" elapsed="4.078312"/>
+</test>
+<test id="s1-t8" name="Get User Info After Delete" line="30">
+<kw name="Get User Without Book" owner="Users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:53.840278" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'}</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.840058" elapsed="0.000257"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-03-13T10:17:57.665108" level="INFO">GET Request : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ path_url=/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:17:57.665218" level="INFO">GET Response : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:18:04 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '85', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"55-CTSMtIvyiv3eKkm46oaiAWMF93U"'} 
+ body={"userId":"970cfdcb-7745-45fe-b9ae-38126573a39e","username":"pauloqa2391","books":[]} 
+ </msg>
+<msg time="2026-03-13T10:17:57.665370" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/User/${userId}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-03-13T10:17:53.840434" elapsed="3.824979"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.666212" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.665615" elapsed="0.000678"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.666428" elapsed="0.000642"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.667286" elapsed="0.001451"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.670238" level="INFO">RESPONSE BODY: {'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'username': 'pauloqa2391', 'books': []}</msg>
+<arg>RESPONSE BODY: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.669296" elapsed="0.001042"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.671672" level="INFO">${body} = {'userId': '970cfdcb-7745-45fe-b9ae-38126573a39e', 'username': 'pauloqa2391', 'books': []}</msg>
+<var>${body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.670653" elapsed="0.001105"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.672995" level="INFO">${books} = []</msg>
+<var>${books}</var>
+<arg>${body["books"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.672001" elapsed="0.001052"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body["userId"]}</arg>
+<arg>${userId}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.673352" elapsed="0.000673"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.674634" level="INFO">Length is 11.</msg>
+<arg>${body["username"]}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.674178" elapsed="0.000514"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($books, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.674824" elapsed="0.000292"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.675612" level="INFO">Length is 0.</msg>
+<arg>${books}</arg>
+<arg>0</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.675310" elapsed="0.000394"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:53.839805" elapsed="3.836026"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:53.839285" elapsed="3.837148"/>
+</test>
+<test id="s1-t9" name="Delete User" line="33">
+<kw name="Delete User" owner="Users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:17:57.678671" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'}</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.678136" elapsed="0.000585"/>
+</kw>
+<kw name="DELETE" owner="RequestsLibrary">
+<msg time="2026-03-13T10:18:02.434386" level="INFO">DELETE Request : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ path_url=/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:18:02.434505" level="INFO">DELETE Response : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ status=204, reason=No Content 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:18:09 GMT', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"58-7S7K/MtWDHm3lQMF4alN7V9LhC4"'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:18:02.434624" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/User/${userId}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a DELETE request.</doc>
+<status status="PASS" start="2026-03-13T10:17:57.679046" elapsed="4.755604"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:18:02.435246" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>204</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.434792" elapsed="0.000506"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.435443" elapsed="0.000700"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.436379" elapsed="0.000563"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:18:02.437467" level="INFO">RESPONSE TEXT: </msg>
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.437068" elapsed="0.000442"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:57.677705" elapsed="4.759861"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:17:57.677024" elapsed="4.760797"/>
+</test>
+<test id="s1-t10" name="Get Deleted User" line="36">
+<kw name="Get Deleted User" owner="Users">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-13T10:18:02.439426" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'}</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${Token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.439232" elapsed="0.000222"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2026-03-13T10:18:06.172702" level="INFO">GET Request : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ path_url=/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InBhdWxvcWEyMzkxIiwicGFzc3dvcmQiOiJUZXN0QDEyMzQiLCJpYXQiOjE3NzM0MDc4NjB9.Q560CdjCE-5fQ4l41im3sle8gZj_lJgTOhjfHk45938'} 
+ body=None 
+ </msg>
+<msg time="2026-03-13T10:18:06.172789" level="INFO">GET Response : url=https://demoqa.com/Account/v1/User/970cfdcb-7745-45fe-b9ae-38126573a39e 
+ status=401, reason=Unauthorized 
+ headers={'Server': 'nginx/1.17.10 (Ubuntu)', 'Date': 'Fri, 13 Mar 2026 13:18:12 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '43', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'ETag': 'W/"2b-hLPYyb0m8IpHH/aFjmp8VZrYXGw"'} 
+ body={"code":"1207","message":"User not found!"} 
+ </msg>
+<msg time="2026-03-13T10:18:06.172897" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<var>${response}</var>
+<arg>url=${url}/Account/v1/User/${userId}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2026-03-13T10:18:02.439542" elapsed="3.733378"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>STATUS CODE: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.173059" elapsed="0.000663"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.173858" elapsed="0.000515"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-03-13T10:18:06.175028" level="INFO">RESPONSE TEXT: {"code":"1207","message":"User not found!"}</msg>
+<arg>RESPONSE TEXT: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.174580" elapsed="0.000493"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-13T10:18:06.175550" level="INFO">${resp_body} = {'code': '1207', 'message': 'User not found!'}</msg>
+<var>${resp_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.175177" elapsed="0.000396"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-13T10:18:06.175962" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>401</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.175657" elapsed="0.000347"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp_body["code"]}</arg>
+<arg>1207</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.176095" elapsed="0.000336"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${resp_body["message"]}</arg>
+<arg>User not found!</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-13T10:18:06.176513" elapsed="0.000311"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:18:02.438989" elapsed="3.737888"/>
+</kw>
+<status status="PASS" start="2026-03-13T10:18:02.438532" elapsed="3.738625"/>
+</test>
+<status status="PASS" start="2026-03-13T10:17:24.391907" elapsed="41.786087"/>
+</suite>
+<statistics>
+<total>
+<stat pass="10" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Bookstore Testes" id="s1" pass="10" fail="0" skip="0">Bookstore Testes</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
